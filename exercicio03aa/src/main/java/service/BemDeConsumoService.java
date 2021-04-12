@@ -15,19 +15,15 @@ public class BemDeConsumoService {
 	private ProdutoDAO bemDeConsumoDAO;
 
 	public BemDeConsumoService() {
-		try {
-			bemDeConsumoDAO = new ProdutoDAO("bemdeconsumo.dat");
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+		bemDeConsumoDAO = new ProdutoDAO.conectar;
 	}
 
 	public Object add(Request request, Response response) {
 		String descricao = request.queryParams("descricao");
 		float preco = Float.parseFloat(request.queryParams("preco"));
 		int quantidade = Integer.parseInt(request.queryParams("quantidade"));
-		LocalDateTime dataFabricacao = LocalDateTime.parse(request.queryParams("dataFabricacao"));
-		LocalDate dataValidade = LocalDate.parse(request.queryParams("dataValidade"));
+		LocalDateTime dataFabricacao = LocalDateTime.parse(request.queryParams("data_fabricacao"));
+		LocalDate dataValidade = LocalDate.parse(request.queryParams("data_validade"));
 
 		int id = bemDeConsumoDAO.getMaxId() + 1;
 
@@ -69,11 +65,11 @@ public class BemDeConsumoService {
 		BemDeConsumo bemDeConsumo = (BemDeConsumo) bemDeConsumoDAO.get(id);
 
         if (bemDeConsumo != null) {
-        	bemDeConsumo.setDescricao(request.queryParams("descricao"));
-        	bemDeConsumo.setPreco(Float.parseFloat(request.queryParams("preco")));
-        	bemDeConsumo.setQuant(Integer.parseInt(request.queryParams("quantidade")));
-        	bemDeConsumo.setDataFabricacao(LocalDateTime.parse(request.queryParams("dataFabricacao")));
-        	bemDeConsumo.setDataValidade(LocalDate.parse(request.queryParams("dataValidade")));
+        	String descricao = request.queryParams("descricao");
+    		float preco = Float.parseFloat(request.queryParams("preco"));
+    		int quantidade = Integer.parseInt(request.queryParams("quantidade"));
+    		LocalDateTime dataFabricacao = LocalDateTime.parse(request.queryParams("data_fabricacao"));
+    		LocalDate dataValidade = LocalDate.parse(request.queryParams("data_validade"));
 
         	bemDeConsumoDAO.update(bemDeConsumo);
         	
