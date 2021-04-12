@@ -29,7 +29,7 @@ function addIdToPath(form_name, base_url){
 			<h1 class="generaltext">Cadastramento de Bem de consumo</h1>
 			<p>Cadastramento de produto através de web service.</p>
 			<form class="form--register"
-				action="http://localhost:6789/bensdeconsumo" method="post"
+				action="http://localhost:5432/produtos" method="post"
 				id="form-add">
 				<p>Descrição:</p>
 				<input class="input--register" type="text" name="descricao" value=""
@@ -59,7 +59,7 @@ function addIdToPath(form_name, base_url){
 		<section class="section--row__responsive">
 			<h1 class="generaltext">Consultar bem de consumo</h1>
 			<p>Consulta bem de consumo no </br> estoque através de web service.</p>
-			<form onsubmit="addIdToPath('form-get', 'http://localhost:6789/bensdeconsumo/')"
+			<form onsubmit="addIdToPath('form-get', 'http://localhost:5432/produtos/')"
 			      method="get" id="form-get">
 				<input class="input--down" type="text" id="id" value=""
 					placeholder="id do produto..."> 
@@ -71,7 +71,7 @@ function addIdToPath(form_name, base_url){
 		<section class="section--row__responsive">
 			<h1 class="generaltext">Remover produto</h1>
 			<p>Remove bem de consumo do estoque.</p>
-			<form  onsubmit="addIdToPath('form-delete', 'http://localhost:6789/bensdeconsumo/delete/')" 
+			<form  onsubmit="addIdToPath('form-delete', 'http://localhost:5432/produtos/delete/')" 
 			       method="get" id="form-delete">
 				<input class="input--down" type="text" id="id" value=""
 					placeholder="id do produto..."> <input type="submit"
@@ -82,7 +82,7 @@ function addIdToPath(form_name, base_url){
 		<section class="section--row__responsive">
 			<h1 class="generaltext">Todos os produtos</h1>
 			<p>Recupera todos os bens</br> de consumo do estoque.</p>
-			<form action="http://localhost:6789/bensdeconsumo"  method="get" id="form-all">
+			<form action="http://localhost:5432/produtos"  method="get" id="form-all">
 				<input type="submit"
 					value="todos" class="input--consult__style input--button">
 			</form>

@@ -28,6 +28,7 @@ public class ProdutoDAO {
 		String username = "postgres";
 		String password = "Opie123";
 		boolean status = false;
+		
 
 		try {
 			Class.forName(driverName);
