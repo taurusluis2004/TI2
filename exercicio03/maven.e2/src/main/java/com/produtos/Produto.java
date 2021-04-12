@@ -1,4 +1,6 @@
 package com.produtos;
+
+import dao.ProdutoDAO;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -7,7 +9,7 @@ import java.time.LocalDateTime;
  * 
  * @author Hugo de Paula
  *
- */
+ */ 
 public abstract class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,7 +19,8 @@ public abstract class Produto implements Serializable {
 	private String descricao;
 	private float preco;
 	private int quantidade;
-	private LocalDateTime dataFabricacao;
+	private LocalDateTime dataF;
+	private LocalDateTime dataV;
 
 	public int getId() {
 		return id;
@@ -49,6 +52,10 @@ public abstract class Produto implements Serializable {
 		return dataFabricacao;
 	}
 
+	public LocalDateTime getDataValidade() {
+		return dataValidade;
+	}
+
 	public void setDescricao(String descricao) {
 		if (descricao.length() >= 3)
 			this.descricao = descricao;
@@ -60,41 +67,52 @@ public abstract class Produto implements Serializable {
 	}
 
 	public void setQuant(int quantidade) {
-		if (quantidade >= 0 && quantidade <= MAX_ESTOQUE)
+		if (quantidade > 0 && quantidade <= MAX_ESTOQUE)
 			this.quantidade = quantidade;
 	}
 
 	public void setDataFabricacao(LocalDateTime dataFabricacao) {
 		// Pega a Data Atual
 		LocalDateTime agora = LocalDateTime.now();
-		// Garante que a data de fabricação não pode ser futura
+		// Garante que a data de fabricaï¿½ï¿½o nï¿½o pode ser futura
 		if (agora.compareTo(dataFabricacao) >= 0)
-			this.dataFabricacao = dataFabricacao;
+			this.dataF = dataFabricacao;
 	}
 
-	public Produto(int id, String descricao, float preco, int quantidade, LocalDateTime fabricacao) {
-		setId(id);
-		setDescricao(descricao);
-		setPreco(preco);
-		setQuant(quantidade);
-		setDataFabricacao(fabricacao);
+	public void setDataValidade(LocalDate dataValidade) {
+		// Pega a Data Atual
+		LocalDate agora = LocalDate.now();
+		// Garante que a data de validade deve ser futura
+		if (agora.compareTo(dataValidade) < 0)
+			this.dataV = dataValidade;
+	}
+
+	public Produto(int id, String descricao, float preco, int quantidade, LocalDateTime fabricacao, LocalDate validade) {
+		this.id = id;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.quantidade = quantidade;
+		this.dataF = fabricacao;
+		this.dataV = validade;
 	}
 
 	public Produto() {
-		descricao = DESCRICAO_PADRAO;
-		preco = 0.01F;
-		quantidade = 0;
-		dataFabricacao = LocalDateTime.now();
+		this.id = id;
+		this.descricao = DESCRICAO_PADRAO;
+		this.preco = 0.01F;
+		this.quantidade = 1;
+		this.dataF = LocalDateTime.now();
+		this.dataV = LocalDate.now().plusMonths(6);
 	}
 
 	/**
-	 * Método sobreposto da classe Object. É executado quando um objeto precisa
+	 * Mï¿½todo sobreposto da classe Object. ï¿½ executado quando um objeto precisa
 	 * ser exibido na forma de String.
 	 */
 	@Override
 	public String toString() {
-		return "Produto: " + descricao + "   Preço: R$" + preco + "   Quant.: " + quantidade + "   Fabricação: "
-				+ dataFabricacao;
+		return "Produto: " + descricao + "   Preï¿½o: R$" + preco + "   Quant.: " + quantidade + "   Fabricaï¿½ï¿½o: "
+				+ dataF + "   Validade: " + dataV;
 	}
 
 	@Override

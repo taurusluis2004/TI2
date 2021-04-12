@@ -60,8 +60,8 @@ public class ProdutoDAO {
 		try {  
 			Statement st = conexao.createStatement();
 			st.executeUpdate("INSERT INTO produtos (id, descricao, preco, quantidade, data_fabricacao; data_validade) "
-					       + "VALUES ("+brecho.getId()+ ", '" + brecho.getNome() + "', '"  
-					       + brecho.getInstagram() + "', '" + brecho.getCidade() + "', '" + brecho.getEstilo() + "');");
+					       + "VALUES ("+produto.getId()+ ", '" + produto.getDescricao() + "', '"  
+					       + produto.getPreco() + "', '" + produto.getQuantidade() + "', '" + produto.getDataF() + "', '" + produto.getDataV() + "');");
 			st.close();
 			status = true;
 		} catch (SQLException u) {  
@@ -70,14 +70,14 @@ public class ProdutoDAO {
 		return status;
 	}
 	
-	public boolean atualizarBrecho(Brecho brecho) {
+	public boolean atualizar(Produto produto) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			String sql = "UPDATE brechos SET nome = '" + brecho.getNome() + "', instagram = '"  
-				       + brecho.getInstagram() + "', cidade = '" + brecho.getCidade()
-				       + "', estilo = '" + brecho.getEstilo() + "'"
-					   + " WHERE id = " + brecho.getId();
+			String sql = "UPDATE produtos SET descricao = '" + produto.getDescricao() + "', preco = '"  
+				       + produto.getPreco() + "', quantidade = '" + produto.getQuantidade()
+				       + "', data_fabricacao = '" + produto.getDataF() + + "', data_validade = '" + produto.getDataV() + "'" 
+					   + " WHERE id = " + produto.getId();
 			st.executeUpdate(sql);
 			st.close();
 			status = true;
@@ -87,11 +87,11 @@ public class ProdutoDAO {
 		return status;
 	}
 	
-	public boolean excluirBrecho(int id) {
+	public boolean excluir(int id) {
 		boolean status = false;
 		try {  
 			Statement st = conexao.createStatement();
-			st.executeUpdate("DELETE FROM brechos WHERE id = " + id);
+			st.executeUpdate("DELETE FROM produtos WHERE id = " + id);
 			st.close();
 			status = true;
 		} catch (SQLException u) {  
@@ -100,28 +100,28 @@ public class ProdutoDAO {
 		return status;
 	}
 	
-	public Brecho[] getBrechos() {
-		Brecho[] brechos = null;
+	public Produto[] getProdutos() {
+		Produto[] produtos = null;
 		
 		try {
 			Statement st = conexao.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = st.executeQuery("SELECT * FROM brechos");		
+			ResultSet rs = st.executeQuery("SELECT * FROM produtos");		
 	         if(rs.next()){
 	             rs.last();
-	             brechos = new Brecho[rs.getRow()];
+	             produtos = new Produto[rs.getRow()];
 	             rs.beforeFirst();
 
 	             for(int i = 0; rs.next(); i++) {
-	            	 brechos[i] = new Brecho(rs.getInt("id"), rs.getString("nome"), 
-	                		                  rs.getString("instagram"), rs.getString("cidade"), 
-	                		                  rs.getString("estilo"));
+	            	 produtos[i] = new Produto(rs.getInt("id"), rs.getString("descricao"), 
+	                		                  rs.getFloat("preco"), rs.getInt("quantidade"), 
+	                		                  rs.getLocalDateTime("data_validade"), rs.getLocalDateTime("data_fabricacao"));
 	             }
 	          }
 	          st.close();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
-		return brechos;
+		return produtos;
 	}
 
 	
