@@ -19,13 +19,13 @@ function addIdToPath(form_name, base_url){
 
 <body>
 	<p>
-	<h1>Controle de Estoque</h1>
+	<h1 class="tt">Controle de Estoque</h1>
 	</p>
 
 
 	<section class="section--container__responsive">
 
-		<section class="section--mainrow__responsive first--section">
+		<section class="section--mainrow__responsive first--section p1">
 			<h1 class="generaltext">Cadastramento de Bem de consumo</h1>
 			<p>Cadastramento de produto através de web service.</p>
 			<form class="form--register"
@@ -39,6 +39,7 @@ function addIdToPath(form_name, base_url){
 				<p>Quantidade:</p>
 				<input class="input--register" type="text" name="quantidade"
 					value="">
+		</br>
 				<p>Data de fabricação:</p>
 				<input class="input--register" type="text" name="dataFabricacao"
 					value="" placeholder="2020-04-16T12:00:00..."> 
@@ -57,7 +58,7 @@ function addIdToPath(form_name, base_url){
 
 		<section class="section--row__responsive">
 			<h1 class="generaltext">Consultar bem de consumo</h1>
-			<p>Consulta bem de consumo no estoque através de web service.</p>
+			<p>Consulta bem de consumo no </br> estoque através de web service.</p>
 			<form onsubmit="addIdToPath('form-get', 'http://localhost:6789/bensdeconsumo/')"
 			      method="get" id="form-get">
 				<input class="input--down" type="text" id="id" value=""
@@ -80,7 +81,7 @@ function addIdToPath(form_name, base_url){
 
 		<section class="section--row__responsive">
 			<h1 class="generaltext">Todos os produtos</h1>
-			<p>Recupera todos os bens de consumo do estoque.</p>
+			<p>Recupera todos os bens</br> de consumo do estoque.</p>
 			<form action="http://localhost:6789/bensdeconsumo"  method="get" id="form-all">
 				<input type="submit"
 					value="todos" class="input--consult__style input--button">
@@ -123,10 +124,22 @@ function addIdToPath(form_name, base_url){
 
 body {
 	background-color: white;
+	margin: 50px;
+	padding: 20px;
+	border: double;
+	border-color: teal;
+}
+
+.tt{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: -30px;
 }
 
 .generaltext, p {
-	font-family: Arial;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	text-align: center;
 }
 
@@ -135,8 +148,18 @@ body {
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	border-bottom: dashed;
-	border-color: gray;
+	border-top: double;
+	border-color: teal;
+	margin-top: 60px;
+	margin-bottom: -110px;
+}
+.section--container__responsive .p1{
+	padding-bottom: 60px;
+}
+
+.section--row__responsive{
+	margin: 40px;
+	margin-top: 0px;
 }
 
 .input--down {
@@ -146,20 +169,19 @@ body {
 }
 
 .input--main__style {
-	background-color: #00FF00;
+	background-color: #287212;
 }
 
 .input--remove__style {
-	background-color: red;
+	background-color: rgb(155, 15, 15);
 }
 
 .input--consult__style {
-	background-color: darkblue;
+	background-color: rgb(0, 95, 139);
 }
 
 .input--button {
-	font-weight: bold;
-	font-family: Arial;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-size: medium;
 	border-color: transparent;
 	display: block;
@@ -169,7 +191,8 @@ body {
 }
 
 .input--register {
-	display: inline;
+	display: inline-block;
+	margin: 20px;
 }
 
 .input--radio {
