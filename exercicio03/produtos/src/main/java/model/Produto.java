@@ -1,6 +1,6 @@
 package model;
 
-import java.io.Serializable;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * @author Luana Takeishi
  *
  */ 
-public abstract class Produto implements Serializable {
+public class Produto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	public static final String DESCRICAO_PADRAO = "Novo Produto";
@@ -22,6 +22,24 @@ public abstract class Produto implements Serializable {
 	private LocalDateTime dataF;
 	private LocalDate dataV;
 
+	public Produto(int id, String descricao, float preco, int quantidade, LocalDateTime fabricacao, LocalDate validade) {
+		this.id = id;
+		this.descricao = descricao;
+		this.preco = preco;
+		this.quantidade = quantidade;
+		this.dataF = fabricacao;
+		this.dataV = validade;
+	}
+
+	public Produto() {
+		this.id = id;
+		this.descricao = DESCRICAO_PADRAO;
+		this.preco = 0.01F;
+		this.quantidade = 1;
+		this.dataF = LocalDateTime.now();
+		this.dataV = LocalDate.now().plusMonths(6);
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -87,23 +105,7 @@ public abstract class Produto implements Serializable {
 			this.dataV = dataValidade;
 	}
 
-	public Produto(int id, String descricao, float preco, int quantidade, LocalDateTime fabricacao, LocalDate validade) {
-		this.id = id;
-		this.descricao = descricao;
-		this.preco = preco;
-		this.quantidade = quantidade;
-		this.dataF = fabricacao;
-		this.dataV = validade;
-	}
 
-	public Produto() {
-		this.id = id;
-		this.descricao = DESCRICAO_PADRAO;
-		this.preco = 0.01F;
-		this.quantidade = 1;
-		this.dataF = LocalDateTime.now();
-		this.dataV = LocalDate.now().plusMonths(6);
-	}
 
 	/**
 	 * M�todo sobreposto da classe Object. � executado quando um objeto precisa

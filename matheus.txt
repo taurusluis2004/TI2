@@ -1,0 +1,58 @@
+
+
+public class ProdutoService {
+
+    private PersonagemDAO personagemDAO;
+
+    public ProdutoService() {
+            personagemDAO = new PersonagemDAO();
+    }
+
+    public Object inserirUsuario(Request request, Response response) {
+
+        int player_id = Integer.parseInt(request.queryParams("player"));
+        int skin_id = Integer.parseInt(request.queryParams("Skin"));
+
+        boolean resultados = false;
+        if( Integer.parseInt(request.queryParams("mana_tip")) == 1 )
+        {
+         resultados = true;
+        }
+        else
+        {
+            resultados = false;
+        }
+
+        boolean mana_tip = resultados;
+        int power = Integer.parseInt(request.queryParams("power"));
+
+        Usuario usuario = new Usuario(player_id, skin_id, mana_tip, power);
+        personagemDAO.inserirUsuario(usuario);
+
+        response.status(201); // 201 Created
+        return player_id;
+    }
+
+
+
+
+	public ProdutoService() {
+		ProdutoDAO = new ProdutoDAO(); //ProdutoDAO.conectar;
+	}
+
+	public Object add(Request request, Response response) {
+		String descricao = request.queryParams("descricao");
+		float preco = Float.parseFloat(request.queryParams("preco"));
+		int quantidade = Integer.parseInt(request.queryParams("quantidade"));
+		LocalDateTime dataFabricacao = LocalDateTime.parse(request.queryParams("data_fabricacao"));
+		LocalDate dataValidade = LocalDate.parse(request.queryParams("data_validade"));
+
+		int id = ProdutoDAO.getMaxId() + 1;
+
+		Produto produto = new Produto(id, descricao, preco, quantidade, dataFabricacao, dataValidade);
+
+		ProdutoDAO.inserir(produto);
+
+		response.status(201); // 201 Created
+		return id;
+	}
